@@ -11,3 +11,9 @@ Things I want to do for dwm
 	is originally 1. Then, I keep hitting the incnmaster (.i = +1) keybind and the count goes up beyond 2. To restore the
 	master window count, I need to hit the reverse incnmaster (.i = -1) keybind to get it back to its original value.
 	The reverse incnmaster (.i = -1) function works as expected though. It won't ever go beyond 0 (can't be lower than 0).
+
+- Restructure dwm code
+
+        I like my macros, structs, union, and variable declarations to reside in a header file.
+        I noticed that those are inside a .c file (dwm.c), so I thought that maybe it's better to make a new header file
+        to store those in.
