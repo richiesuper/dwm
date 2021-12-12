@@ -1,0 +1,3 @@
+# Ignore all .o and executables
+*.o
+dwm
