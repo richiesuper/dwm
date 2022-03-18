@@ -99,10 +99,10 @@ struct Client {
 	int bw, oldbw;
 	unsigned int tags;
 	int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen, isterminal, noswallow;
-    pid_t pid;
+	pid_t pid;
 	Client *next;
 	Client *snext;
-    Client *swallowing;
+	Client *swallowing;
 	Monitor *mon;
 	Window win;
 };
@@ -146,8 +146,8 @@ typedef struct {
 	const char *title;
 	unsigned int tags;
 	int isfloating;
-    int isterminal;
-    int noswallow;
+	int isterminal;
+	int noswallow;
 	int monitor;
 } Rule;
 
@@ -316,8 +316,8 @@ applyrules(Client *c)
 		&& (!r->class || strstr(class, r->class))
 		&& (!r->instance || strstr(instance, r->instance)))
 		{
-            c->isterminal = r->isterminal;
-            c->noswallow  = r->noswallow;
+			c->isterminal = r->isterminal;
+			c->noswallow  = r->noswallow;
 			c->isfloating = r->isfloating;
 			c->tags |= r->tags;
 			for (m = mons; m && m->num != r->monitor; m = m->next);
@@ -720,8 +720,8 @@ destroynotify(XEvent *e)
 
 	if ((c = wintoclient(ev->window)))
 		unmanage(c, 1);
-    else if ((c = swallowingclient(ev->window)))
-        unmanage(c->swallowing, 1);
+	else if ((c = swallowingclient(ev->window)))
+		unmanage(c->swallowing, 1);
 }
 
 void
@@ -1093,7 +1093,7 @@ manage(Window w, XWindowAttributes *wa)
 
 	c = ecalloc(1, sizeof(Client));
 	c->win = w;
-    c->pid = winpid(w);
+	c->pid = winpid(w);
 	/* geometry */
 	c->x = c->oldx = wa->x;
 	c->y = c->oldy = wa->y;
@@ -1108,7 +1108,7 @@ manage(Window w, XWindowAttributes *wa)
 	} else {
 		c->mon = selmon;
 		applyrules(c);
-        term = termforwin(c);
+		term = termforwin(c);
 	}
 
 	if (c->x + WIDTH(c) > c->mon->mx + c->mon->mw)
@@ -1145,8 +1145,8 @@ manage(Window w, XWindowAttributes *wa)
 	c->mon->sel = c;
 	arrange(c->mon);
 	XMapWindow(dpy, c->win);
-    if (term)
-        swallow(term, c);
+	if (term)
+		swallow(term, c);
 	focus(NULL);
 }
 
@@ -1847,7 +1847,7 @@ unmanage(Client *c, int destroyed)
 	}
 
 	Client *s = swallowingclient(c->win);
-    if (s) {
+	if (s) {
 		free(s->swallowing);
 		s->swallowing = NULL;
 		arrange(m);
@@ -2361,8 +2361,8 @@ main(int argc, char *argv[])
 		fputs("warning: no locale support\n", stderr);
 	if (!(dpy = XOpenDisplay(NULL)))
 		die("dwm: cannot open display");
-    if (!(xcon = XGetXCBConnection(dpy)))
-        die("dwm: cannot get xcb connection");
+	if (!(xcon = XGetXCBConnection(dpy)))
+		die("dwm: cannot get xcb connection");
 	checkotherwm();
 	setup();
 #ifdef __OpenBSD__
